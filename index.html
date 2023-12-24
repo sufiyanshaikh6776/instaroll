@@ -251,38 +251,34 @@
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const body = document.body;
     const reelButton = document.getElementById('reelButton');
     const reelVideoContainer = document.getElementById('reelVideoContainer');
     const reelVideoPlayer = document.getElementById('reelVideoPlayer');
     const videoPlayer = document.getElementById('videoPlayer');
     const videoButtons = document.getElementById('videoButtons');
 
-    // Define an array of reel video URLs
     const reelVideoUrls = [
-        'C:\Users\sufiy\Desktop\Application\vedio4.mp4',
-        'C:\Users\sufiy\Desktop\Application\video2.mp4',
-        'C:\Users\sufiy\Desktop\Application\video3.mp4',
+        'video1.mp4',
+        'video2.mp4',
+        'video3.mp4',
+        'video4.mp4',
         // Add more video URLs as needed
     ];
 
-    let currentReelIndex = 0; // Track the current index of the reel video
+    let currentReelIndex = 0;
 
     reelButton.addEventListener('click', function () {
-        // Load the next reel video
         reelVideoPlayer.src = reelVideoUrls[currentReelIndex];
         reelVideoContainer.style.display = 'flex';
-
-        // Hide the main video player and buttons
         videoPlayer.style.display = 'none';
         videoButtons.style.display = 'none';
 
-        // Increment the reel index for the next click
         currentReelIndex = (currentReelIndex + 1) % reelVideoUrls.length;
     });
 
     // Additional event listeners for other buttons can be added here
 });
+
 
 </script>
 </head>
