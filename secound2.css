@@ -1,0 +1,282 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    color: #333;
+}
+
+/* Add your existing CSS styles here */
+
+header {
+    background-color: #8a2be2;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #fff;
+}
+
+#main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#feed {
+    max-width: 600px;
+    margin: 20px;
+}
+
+#videoContainer {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+}
+
+#videoPlayer,
+#reelVideoPlayer {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+#reelVideoContainer {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    height: 100vh;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+#reelVideoPlayer {
+    width: 100vw; /* Set to 100% of the viewport width */
+    height: 177.78vw; /* 100vw * (9 / 16) for 9:16 aspect ratio */
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+#videoButtons {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    }
+    .button {
+        color: #fff;
+        padding: 8px 12px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        background-color: #3897f0;
+        border-radius: 6px;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Added color transition */
+    }
+    
+    .button:hover {
+        background-color: #2684f9;
+    }
+    
+
+
+    #likeButton,
+    #shareButton,
+    #commentButton {
+    font-size: 18px;
+    }
+    
+    #likeButton {
+        font-size: 18px;
+        position: relative;
+    }
+    
+    #likeButton.clicked::before {
+        content: '\2665'; /* Heart symbol */
+        color: red;
+        position: absolute;
+        left: -20px;
+    }
+    
+    #shareButton::before {
+        content: '\1F4E9'; /* Share symbol */
+        font-size: 18px;
+        margin-right: 6px;
+    }
+    
+    #commentButton::before {
+        content: '\1F4AC'; /* Comment symbol */
+        font-size: 18px;
+        margin-right: 6px;
+    }
+    
+
+/* Styling for the bottom bar */
+#bottom-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.bottom-button {
+    color: #333;
+    cursor: pointer;
+}
+
+.bottom-button:hover {
+    color: #2684f9;
+}
+
+.button-container {
+background-color: #3897f0;
+border-radius: 6px;
+width: 100%;
+transition: background-color 0.3s ease; /* Smooth transition for the background color */
+}
+
+#reelButton:hover,
+#accountButton:hover {
+background-color: #2684f9;
+color: #fff;
+}
+/* Styling for the footer */
+footer {
+    background-color: #333; /* Change to your desired color for the footer */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+@keyframes colorChange {
+    0% {
+        background-color: #8a2be2;
+    }
+
+    70% {
+        background-color: #ff5a5f;
+    }
+
+    100% {
+        background-color: #8a2be2;
+    }
+}
+
+.animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place behind other elements */
+    animation: colorChange 5s infinite; /* Adjust the duration as needed */
+}
+
+/*----------------------------------------------------------------------*/
+#bottom-bar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.bottom-button-container {
+display: flex;
+align-items: center;
+justify-content: space-around;
+width: 50%;
+}
+
+.bottom-button {
+    position: relative;
+    color: #333;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.bottom-button:hover {
+    color: #fff;
+    background-color: #2684f9;
+}
+
+.active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background-color: #2684f9;
+    border-radius: 2px;
+    transition: left 0.3s ease;
+}
+
+/* Custom scrollbar style */
+#bottom-bar {
+    overflow-x: scroll;
+}
+    .bottom-button-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 50%;
+    }   
+    .bottom-button-container {
+        overflow-x: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: #333 #fff;
+    }
+    
+    .bottom-button-container::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .bottom-button-container::-webkit-scrollbar-track {
+        background-color: #fff;
+    }
+    
+    .bottom-button-container::-webkit-scrollbar-thumb {
+        background-color: #333;
+        border-radius: 4px;
+    }
+    
+    .bottom-button-container::-webkit-scrollbar-thumb:hover {
+        background-color: #555;
+    }
+    .button.clicked {
+        background-color: red; /* Change the color when clicked */
+        color: #fff; /* Change the text color when clicked */
+    }
