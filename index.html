@@ -5,282 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instaroll</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #fafafa;
-            color: #333;
-        }
-
-        header {
-            background-color: #8a2be2;
-            padding: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #fff;
-        }
-
-        #main-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        #feed {
-            max-width: 600px;
-            margin: 20px;
-        }
-
-        #videoContainer {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        #videoPlayer,
-        #reelVideoPlayer {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 16px;
-        }
-
-        #reelVideoContainer {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            height: 100vh;
-            background-color: #000;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 2;
-        }
-
-        #videoButtons {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-}
-
-
-.button {
-    color: #fff;
-    padding: 8px 12px;
-    cursor: pointer;
-    width: 100%;
-    text-align: center;
-    font-size: 16px;
-}
-
-.button:hover {
-    background-color: #2684f9;
-}
-
-
-        #likeButton,
-        #shareButton,
-        #commentButton {
-            font-size: 18px;
-        }
-
-        /* Styling for the bottom bar */
-        #bottom-bar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #fff;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-        }
-
-        .bottom-button {
-            color: #333;
-            cursor: pointer;
-        }
-
-        .bottom-button:hover {
-            color: #2684f9;
-        }
-
-        .button-container {
-    background-color: #3897f0;
-    border-radius: 6px;
-    width: 100%;
-    transition: background-color 0.3s ease; /* Smooth transition for the background color */
-}
-
-        /* Additional styles for Reel and Account buttons */
-        #reelButton:hover,
-        #accountButton:hover {
-            background-color: #2684f9;
-            color: #fff;
-        }
-
-        /* Styling for the footer */
-        footer {
-            background-color: #333; /* Change to your desired color for the footer */
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 0;
-        }
-
-        @keyframes colorChange {
-            0% {
-                background-color: #8a2be2;
-            }
-
-            70% {
-                background-color: #ff5a5f;
-            }
-
-            100% {
-                background-color: #8a2be2;
-            }
-        }
-
-        .animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Place behind other elements */
-            animation: colorChange 5s infinite; /* Adjust the duration as needed */
-        }
-
-        /*----------------------------------------------------------------------*/
-/* Styling for the bottom bar */
-#bottom-bar {
-    display: flex;
-    justify-content: space-around;
-    background-color: #fff;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-.bottom-button-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 50%;
-}
-
-.bottom-button {
-    position: relative;
-    color: #333;
-    cursor: pointer;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.bottom-button:hover {
-    color: #fff;
-    background-color: #2684f9;
-}
-
-/* Add an indicator for the active button */
-.active-indicator {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 3px;
-    background-color: #2684f9;
-    border-radius: 2px;
-    transition: left 0.3s ease;
-}
-</style>
-<style>
-
-    /* Custom scrollbar style */
-#bottom-bar {
-    /* ... your existing styles ... */
-    overflow-x: scroll; /* Enable horizontal scrolling if needed */
-}
-
-.bottom-button-container {
-    /* ... your existing styles ... */
-    overflow-x: scroll; /* Enable horizontal scrolling if needed */
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #333 #fff; /* Firefox */
-}
-
-.bottom-button-container::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
-}
-
-.bottom-button-container::-webkit-scrollbar-track {
-    background-color: #fff; /* Track color */
-}
-
-.bottom-button-container::-webkit-scrollbar-thumb {
-    background-color: #333; /* Thumb color */
-    border-radius: 4px; /* Rounded corners */
-}
-
-.bottom-button-container::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Thumb color on hover */
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const reelButton = document.getElementById('reelButton');
-    const reelVideoContainer = document.getElementById('reelVideoContainer');
-    const reelVideoPlayer = document.getElementById('reelVideoPlayer');
-    const videoPlayer = document.getElementById('videoPlayer');
-    const videoButtons = document.getElementById('videoButtons');
-
-    const reelVideoUrls = [
-        'video2.mp4',
-        'video2.mp4',
-        'video3.mp4',
-        'video4.mp4',
-        // Add more video URLs as needed
-    ];
-
-    let currentReelIndex = 0;
-
-    reelButton.addEventListener('click', function () {
-        reelVideoPlayer.src = reelVideoUrls[currentReelIndex];
-        reelVideoContainer.style.display = 'flex';
-        videoPlayer.style.display = 'none';
-        videoButtons.style.display = 'none';
-
-        currentReelIndex = (currentReelIndex + 1) % reelVideoUrls.length;
-    });
-
-    // Additional event listeners for other buttons can be added here
-});
-
-
-</script>
+    <link rel="stylesheet" href="secound2.css">
+    <script src="secound2.js"></script>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
 <body>
@@ -289,52 +16,37 @@ document.addEventListener('DOMContentLoaded', function () {
     </header>
 
     <div class="animated-background"></div>
-
     <div id="main-content">
         <div id="main-container">
-
             <div id="feed">
                 <!-- Your existing feed content -->
-            </div>
-
-            <div id="videoContainer">
-                <!-- Main Video Player -->
-                <video id="videoPlayer" controls>
-                    <!-- Replace 'your_video_url' with the actual URL of your video -->
-                    <source src="video3.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-
-                <!-- Reel Video Container -->
-                <div id="reelVideoContainer">
-                    <!-- Reel Video Player -->
-                    <video id="reelVideoPlayer" controls>
-                        <!-- Replace 'your_reel_video_url' with the actual URL of your reel video -->
-                        <source src="video2.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-
-                    <!-- Video Buttons -->
-                    <div id="videoButtons" class="button-container">
-                        <div class="button" id="likeButton">&#10084; Like</div>
-                        <div class="button" id="shareButton">Share</div>
-                        <div class="button" id="commentButton">Comment</div>
-                    </div>                    
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- Reel Video Container -->
+    <div id="reelVideoContainer">
+        <!-- Reel Video Player -->
+        <video id="reelVideoPlayer" controls>
+            <!-- Replace 'your_reel_video_url' with the actual URL of your reel video -->
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Video Buttons -->
+        <div id="videoButtons" class="button-container">
+            <div class="button" id="likeButton">&#10084; Like</div>
+            <div class="button" id="shareButton">Share</div>
+            <div class="button" id="commentButton">Comment</div>
+        </div>
+    </div>
+
     <!-- Bottom bar with Reel and Account buttons -->
-<!-- Bottom bar with Reel and Account buttons -->
-<div id="bottom-bar" class="bottom-button-container">
-    <div class="bottom-button" id="reelButton">Reel</div>
-    <div class="bottom-button" id="accountButton">Account</div>
-</div>
-    <!-- Footer -->
-    <footer>
-        &copy; 2023 Instaroll. All rights reserved.
-    </footer>
+    <div id="bottom-bar" class="bottom-button-container">
+        <div class="bottom-button" id="reelButton">Reel</div>
+        <div class="bottom-button" id="accountButton">Account</div>
+    </div>
+
 </body>
 
 </html>
